@@ -40,8 +40,8 @@ BEGIN
         FROM 'E:\Projects\olist-data-engineering\data\olist_customers_dataset.csv'
         WITH (
             FORMAT = 'CSV',
+            FIELDQUOTE = '"',
             FIRSTROW = 2,
-            FIELDTERMINATOR = ',',
             CODEPAGE = '65001',
             TABLOCK
         );
@@ -60,10 +60,10 @@ BEGIN
         FROM 'E:\Projects\olist-data-engineering\data\olist_geolocation_dataset.csv'
         WITH (
             FORMAT = 'CSV',
+            FIELDQUOTE = '"',
             FIRSTROW = 2,
-            FIELDTERMINATOR = ',',
-            ROWTERMINATOR = '0x0a',
             CODEPAGE = '65001',
+            ROWTERMINATOR = '0x0a',
             TABLOCK
         );
         SET @end_time = GETDATE();
@@ -80,10 +80,11 @@ BEGIN
         BULK INSERT bronze.olist_order_items_dataset
         FROM 'E:\Projects\olist-data-engineering\data\olist_order_items_dataset.csv'
         WITH (
+            FORMAT = 'CSV',
+            FIELDQUOTE = '"',
             FIRSTROW = 2,
-            FIELDTERMINATOR = ',',
-            ROWTERMINATOR = '0x0a',
             CODEPAGE = '65001',
+            ROWTERMINATOR = '0x0a',
             TABLOCK
         );
         SET @end_time = GETDATE();
@@ -100,10 +101,11 @@ BEGIN
         BULK INSERT bronze.olist_order_payments_dataset
         FROM 'E:\Projects\olist-data-engineering\data\olist_order_payments_dataset.csv'
         WITH (
+            FORMAT = 'CSV',
+            FIELDQUOTE = '"',
             FIRSTROW = 2,
-            FIELDTERMINATOR = ',',
-            ROWTERMINATOR = '0x0a',
             CODEPAGE = '65001',
+            ROWTERMINATOR = '0x0a',
             TABLOCK
         );
         SET @end_time = GETDATE();
@@ -141,9 +143,11 @@ BEGIN
         BULK INSERT bronze.olist_orders_dataset
         FROM 'E:\Projects\olist-data-engineering\data\olist_orders_dataset.csv'
         WITH (
+            FORMAT = 'CSV',
+            FIELDQUOTE = '"',
             FIRSTROW = 2,
-            FIELDTERMINATOR = ',',
             CODEPAGE = '65001',
+            ROWTERMINATOR = '0x0a',
             TABLOCK
         );
         SET @end_time = GETDATE();
@@ -160,10 +164,11 @@ BEGIN
         BULK INSERT bronze.olist_products_dataset
         FROM 'E:\Projects\olist-data-engineering\data\olist_products_dataset.csv'
         WITH (
+            FORMAT = 'CSV',
+            FIELDQUOTE = '"',
             FIRSTROW = 2,
-            FIELDTERMINATOR = ',',
-            ROWTERMINATOR = '0x0a',
             CODEPAGE = '65001',
+            ROWTERMINATOR = '0x0a',
             TABLOCK
         );
         SET @end_time = GETDATE();
@@ -201,9 +206,11 @@ BEGIN
         BULK INSERT bronze.product_category_name_translation
         FROM 'E:\Projects\olist-data-engineering\data\product_category_name_translation.csv'
         WITH (
+            FORMAT = 'CSV',
+            FIELDQUOTE = '"',
             FIRSTROW = 2,
-            FIELDTERMINATOR = ',',
             CODEPAGE = '65001',
+            ROWTERMINATOR = '0x0a',
             TABLOCK
         );
         SET @end_time = GETDATE();
