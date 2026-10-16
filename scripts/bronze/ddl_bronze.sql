@@ -12,6 +12,10 @@ Script Purpose:
 USE [OlistDW];
 GO
 
+IF SCHEMA_ID('bronze') IS NULL
+    EXEC('CREATE SCHEMA bronze');
+GO
+
 IF OBJECT_ID('bronze.olist_customers_dataset', 'U') IS NOT NULL
     DROP TABLE bronze.olist_customers_dataset;
 GO
@@ -34,8 +38,8 @@ GO
 CREATE TABLE bronze.olist_geolocation_dataset
 (
     geolocation_zip_code_prefix  VARCHAR(10),
-    geolocation_lat              DECIMAL(11, 15),
-    geolocation_lng              DECIMAL(11, 15),
+    geolocation_lat              DECIMAL(11, 8),
+    geolocation_lng              DECIMAL(11, 8),
     geolocation_city             NVARCHAR(100),
     geolocation_state            CHAR(2)
 );
@@ -48,10 +52,10 @@ GO
 
 CREATE TABLE bronze.olist_order_items_dataset
 (
-    order_id             VARCHAR(50) NOT NULL,
+    order_id             VARCHAR(32) NOT NULL,
     order_item_id        INT NOT NULL,
-    product_id           VARCHAR(50) NOT NULL,
-    seller_id            VARCHAR(50) NOT NULL,
+    product_id           VARCHAR(32) NOT NULL,
+    seller_id            VARCHAR(32) NOT NULL,
     shipping_limit_date  DATETIME,
     price                DECIMAL(12, 2),
     freight_value        DECIMAL(12, 2)
@@ -64,7 +68,7 @@ GO
 
 CREATE TABLE bronze.olist_order_payments_dataset
 (
-    order_id                VARCHAR(50) NOT NULL,
+    order_id                VARCHAR(32) NOT NULL,
     payment_sequential      INT NOT NULL,
     payment_type            VARCHAR(30),
     payment_installments    INT,
@@ -78,8 +82,8 @@ GO
 
 CREATE TABLE bronze.olist_order_reviews_dataset
 (
-    review_id                VARCHAR(50) NOT NULL,
-    order_id                 VARCHAR(50) NOT NULL,
+    review_id                VARCHAR(32) NOT NULL,
+    order_id                 VARCHAR(32) NOT NULL,
     review_score             INT,
     review_comment_title     NVARCHAR(500),
     review_comment_message   NVARCHAR(MAX),
@@ -94,8 +98,8 @@ GO
 
 CREATE TABLE bronze.olist_orders_dataset
 (
-    order_id                        VARCHAR(50) NOT NULL,
-    customer_id                     VARCHAR(50) NOT NULL,
+    order_id                        VARCHAR(32) NOT NULL,
+    customer_id                     VARCHAR(32) NOT NULL,
     order_status                    VARCHAR(20) NOT NULL,
     order_purchase_timestamp        DATETIME,
     order_approved_at               DATETIME,
@@ -111,7 +115,7 @@ GO
 
 CREATE TABLE bronze.olist_products_dataset
 (
-    product_id                  VARCHAR(50) NOT NULL,
+    product_id                  VARCHAR(32) NOT NULL,
     product_category_name       NVARCHAR(100),
     product_name_lenght         INT,
     product_description_lenght  INT,
@@ -129,7 +133,7 @@ GO
 
 CREATE TABLE bronze.olist_sellers_dataset
 (
-    seller_id               VARCHAR(50) NOT NULL,
+    seller_id               VARCHAR(32) NOT NULL,
     seller_zip_code_prefix  VARCHAR(10),
     seller_city             NVARCHAR(100),
     seller_state            CHAR(2)
